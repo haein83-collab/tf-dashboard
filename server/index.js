@@ -12,6 +12,12 @@ const { parseEvalHtml } = require('./parseEvalHtml');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+// 정적 파일은 CORS 검사 전에 서빙 (Vite crossorigin 스크립트 호환)
+const distPath = path.join(__dirname, '..', 'dist');
+if (fs.existsSync(distPath)) {
+  app.use(express.static(distPath));
+}
+
 const allowedOrigins = [
   'http://localhost:5173',
   process.env.FRONTEND_URL,  // Vercel 배포 URL (예: https://tf-dashboard.vercel.app)
@@ -334,10 +340,8 @@ app.get('/api/activity', requireAuth, (req, res) => {
   res.json(logs);
 });
 
-// 프로덕션 빌드 서빙 (npm run build 후)
-const distPath = path.join(__dirname, '..', 'dist');
-if (require('fs').existsSync(distPath)) {
-  app.use(express.static(distPath));
+// React 라우터 fallback (정적 파일 외 모든 요청 → index.html)
+if (fs.existsSync(distPath)) {
   app.get('/{*path}', (req, res) => {
     res.sendFile(path.join(distPath, 'index.html'));
   });

@@ -1,0 +1,2 @@
+◇ injected env (4) from .env // tip: ⌁ auth for agents [www.vestauth.com]
+서버 실행 중: http://localhost:3001

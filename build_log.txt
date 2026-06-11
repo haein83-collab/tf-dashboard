@@ -1,0 +1,13 @@
+
+> tf-dashboard@0.0.0 build
+> vite build
+
+[36mvite v8.0.16 [32mbuilding client environment for production...[36m[39m
+[2Ktransforming...✓ 25 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.46 kB │ gzip:  0.30 kB
+dist/assets/index-AYwgvMhZ.css   26.72 kB │ gzip:  5.60 kB
+dist/assets/index-B6W3KCuq.js   222.96 kB │ gzip: 69.01 kB
+
+[32m✓ built in 1.59s[39m

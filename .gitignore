@@ -1,0 +1,36 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# 환경변수 (민감정보)
+.env
+
+# 데이터베이스 (로컬 전용)
+server/*.db
+server/*.db-journal
+server/*.db-shm
+server/*.db-wal
+
+# 업로드 파일 (로컬 전용)
+server/uploads/
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

@@ -20,11 +20,16 @@ if (fs.existsSync(distPath)) {
 
 const allowedOrigins = [
   'http://localhost:5173',
-  process.env.FRONTEND_URL,  // Vercel 배포 URL (예: https://tf-dashboard.vercel.app)
+  process.env.FRONTEND_URL,
+  process.env.RAILWAY_PUBLIC_DOMAIN ? `https://${process.env.RAILWAY_PUBLIC_DOMAIN}` : null,
 ].filter(Boolean);
 app.use(cors({
   origin: (origin, cb) => {
-    if (!origin || allowedOrigins.some(o => origin.startsWith(o))) return cb(null, true);
+    // origin 없음(같은 도메인 직접 요청) 또는 허용 목록에 있으면 통과
+    if (!origin) return cb(null, true);
+    if (allowedOrigins.some(o => origin === o || origin.startsWith(o))) return cb(null, true);
+    // Railway 도메인 자동 허용 (.railway.app)
+    if (origin.endsWith('.railway.app')) return cb(null, true);
     cb(new Error('CORS: not allowed'));
   },
   credentials: true,
